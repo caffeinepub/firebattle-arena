@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Mona Sans";
+  src: url("/assets/fonts/MonaSans.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* FireBattle Arena Dark Gaming Theme */
+    --background: 0.09 0.005 270;
+    --foreground: 0.95 0.01 85;
+    --card: 0.13 0.008 270;
+    --card-foreground: 0.95 0.01 85;
+    --popover: 0.13 0.008 270;
+    --popover-foreground: 0.95 0.01 85;
+    --primary: 0.65 0.25 32;
+    --primary-foreground: 0.98 0 0;
+    --secondary: 0.17 0.01 270;
+    --secondary-foreground: 0.95 0.01 85;
+    --muted: 0.15 0.008 270;
+    --muted-foreground: 0.55 0.02 270;
+    --accent: 0.72 0.18 75;
+    --accent-foreground: 0.09 0 0;
+    --destructive: 0.6 0.22 15;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.22 0.01 270;
+    --input: 0.18 0.01 270;
+    --ring: 0.65 0.25 32;
+
+    /* Chart colors */
+    --chart-1: 0.65 0.25 32;
+    --chart-2: 0.72 0.18 75;
+    --chart-3: 0.55 0.2 240;
+    --chart-4: 0.65 0.22 160;
+    --chart-5: 0.7 0.2 290;
+
+    /* Sidebar */
+    --sidebar: 0.11 0.006 270;
+    --sidebar-foreground: 0.95 0.01 85;
+    --sidebar-primary: 0.65 0.25 32;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.17 0.01 270;
+    --sidebar-accent-foreground: 0.95 0.01 85;
+    --sidebar-border: 0.2 0.01 270;
+    --sidebar-ring: 0.65 0.25 32;
+
+    /* Custom fire tokens */
+    --fire-primary: 0.65 0.25 32;
+    --fire-secondary: 0.72 0.18 55;
+    --fire-gold: 0.72 0.18 75;
+    --fire-glow: 0.65 0.25 32;
+    --surface-raised: 0.16 0.01 270;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Mona Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100dvh;
+  }
+}
+
+@layer components {
+  /* Fire glow effects */
+  .fire-glow {
+    box-shadow: 0 0 20px oklch(0.65 0.25 32 / 0.4), 0 0 40px oklch(0.65 0.25 32 / 0.2);
+  }
+
+  .fire-glow-sm {
+    box-shadow: 0 0 10px oklch(0.65 0.25 32 / 0.3), 0 0 20px oklch(0.65 0.25 32 / 0.15);
+  }
+
+  .gold-glow {
+    box-shadow: 0 0 15px oklch(0.72 0.18 75 / 0.4), 0 0 30px oklch(0.72 0.18 75 / 0.2);
+  }
+
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px oklch(0.65 0.25 32 / 0.2), 0 0 0 1px oklch(0.65 0.25 32 / 0.3);
+  }
+
+  /* Status pulse animation */
+  .status-active-pulse {
+    animation: statusPulse 2s ease-in-out infinite;
+  }
+
+  /* Fire text animation */
+  .fire-text {
+    background: linear-gradient(135deg, 
+      oklch(0.98 0.01 85) 0%,
+      oklch(0.72 0.18 75) 30%,
+      oklch(0.65 0.25 32) 60%,
+      oklch(0.55 0.25 25) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fireShimmer 3s ease-in-out infinite alternate;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply bg-muted animate-pulse rounded;
+  }
+
+  /* Gaming table styles */
+  .gaming-table th {
+    @apply text-xs font-semibold uppercase tracking-wider text-muted-foreground;
+  }
+
+  /* Coin display */
+  .coin-value {
+    font-family: "Geist Mono", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  }
+
+  .font-mono-gaming {
+    font-family: "Geist Mono", monospace;
+  }
+
+  .text-fire {
+    color: oklch(var(--fire-primary));
+  }
+
+  .text-gold {
+    color: oklch(var(--fire-gold));
+  }
+
+  .bg-fire {
+    background-color: oklch(var(--fire-primary));
+  }
+
+  .bg-fire-subtle {
+    background-color: oklch(0.65 0.25 32 / 0.15);
+  }
+
+  .border-fire {
+    border-color: oklch(var(--fire-primary));
+  }
+
+  .border-gold {
+    border-color: oklch(var(--fire-gold));
+  }
+
+  /* Mesh gradient background for hero */
+  .hero-bg {
+    background: 
+      radial-gradient(ellipse at 20% 50%, oklch(0.65 0.25 32 / 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, oklch(0.72 0.18 55 / 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, oklch(0.55 0.2 240 / 0.08) 0%, transparent 50%),
+      oklch(0.09 0.005 270);
+  }
+
+  /* Game card grid pattern */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(oklch(0.65 0.25 32 / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.65 0.25 32 / 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes fireShimmer {
+  0% {
+    background-position: 0% 50%;
+    filter: brightness(1);
+  }
+  100% {
+    background-position: 100% 50%;
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  25% { opacity: 0.85; transform: scaleY(0.98); }
+  50% { opacity: 0.9; transform: scaleY(1.02); }
+  75% { opacity: 0.88; transform: scaleY(0.99); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-flicker {
+  animation: flicker 2.5s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slideInUp 0.4s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(0.11 0.006 270);
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.25 0.01 270);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.65 0.25 32 / 0.5);
+}
